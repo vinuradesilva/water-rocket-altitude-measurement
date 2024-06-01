@@ -109,12 +109,9 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 		while (!bmp280_read_float(&bmp280, &temperature, &pressure, &humidity)) {
-
+			Error_Handler();
 		}
 
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-		HAL_Delay(100);
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 		HAL_Delay(100);
 	}
   /* USER CODE END 3 */
@@ -239,6 +236,10 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	  HAL_Delay(50);
+	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	  HAL_Delay(50);
   }
   /* USER CODE END Error_Handler_Debug */
 }
